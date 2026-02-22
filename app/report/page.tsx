@@ -173,15 +173,33 @@ export default function ReportPage() {
       body: mlFormData,
     });
 
+    const raw = await classifyResponse.text();
     if (!classifyResponse.ok) {
-      return null;
+      let detail = `ML request failed (${classifyResponse.status})`;
+      try {
+        const parsed = JSON.parse(raw) as { error?: string; details?: string };
+        if (parsed.error) detail = parsed.error;
+        if (parsed.details) detail = `${detail}: ${parsed.details}`;
+      } catch {
+        if (raw) detail = `${detail}: ${raw}`;
+      }
+      throw new Error(detail);
     }
 
-    const prediction = (await classifyResponse.json()) as {
+    let prediction: {
       prediction?: string;
       label?: string;
       confidence?: number | string;
     };
+    try {
+      prediction = JSON.parse(raw) as {
+        prediction?: string;
+        label?: string;
+        confidence?: number | string;
+      };
+    } catch {
+      throw new Error("ML API returned invalid JSON");
+    }
 
     const category = normalizeAiCategory(prediction.prediction || prediction.label || null);
     let confidence: number | null = null;
@@ -512,8 +530,9 @@ export default function ReportPage() {
                     } else {
                       setAiError("Could not detect issue type from this image.");
                     }
-                  } catch {
-                    setAiError("Could not detect issue type from this image.");
+                  } catch (err) {
+                    const message = err instanceof Error ? err.message : "Could not detect issue type from this image.";
+                    setAiError(message);
                   } finally {
                     setAiLoading(false);
                   }

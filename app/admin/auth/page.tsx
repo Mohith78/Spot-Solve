@@ -86,7 +86,7 @@ export default function AdminAuthPage() {
     if (signUpError) {
       setError(signUpError.message);
     } else {
-      setSuccess("Admin account created. Verify email if required, then sign in.");
+      setSuccess("Admin account created successfully. You can sign in now.");
     }
 
     setLoading(false);

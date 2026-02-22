@@ -54,7 +54,7 @@ export default function LoginPage() {
     if (signUpError) {
       setError(signUpError.message);
     } else {
-      setSuccess("Account created. Check your email for verification.");
+      setSuccess("Account created successfully. You can sign in now.");
     }
 
     setLoading(false);
