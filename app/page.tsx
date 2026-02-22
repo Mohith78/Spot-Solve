@@ -78,7 +78,7 @@ export default function Home() {
   }, []);
 
   const avgResponseLabel = useMemo(() => {
-    if (!Number.isFinite(avgResponseHours) || avgResponseHours <= 0) return "0h";
+    if (!Number.isFinite(avgResponseHours) || avgResponseHours <= 0) return "0";
     if (avgResponseHours < 1) return `${Math.max(1, Math.round(avgResponseHours * 60))}m`;
     if (avgResponseHours < 24) return `${avgResponseHours.toFixed(1)}h`;
     return `${Math.round(avgResponseHours / 24)}d`;
@@ -180,14 +180,14 @@ export default function Home() {
           <p className="text-sm text-muted-foreground mt-2 font-medium">Issues Resolved</p>
         </div>
         <div className="text-center scale-in delay-1">
-          <p className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent-emerald to-accent-cyan bg-clip-text text-transparent">
+          <p className="text-4xl md:text-5xl font-bold text-slate-900">
             {statsLoading ? 0 : communitiesCount}
           </p>
           <p className="text-sm text-muted-foreground mt-2 font-medium">Communities</p>
         </div>
         <div className="text-center scale-in delay-2">
-          <p className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-accent-purple to-accent-pink bg-clip-text text-transparent">
-            {statsLoading ? "0h" : avgResponseLabel}
+          <p className="text-4xl md:text-5xl font-bold text-slate-900">
+            {statsLoading ? "0" : avgResponseLabel}
           </p>
           <p className="text-sm text-muted-foreground mt-2 font-medium">Avg Response</p>
         </div>

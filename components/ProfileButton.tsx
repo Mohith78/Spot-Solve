@@ -68,7 +68,10 @@ export function ProfileButton() {
 
   return (
     <div className="relative">
-      <Button onClick={() => setOpen((v) => !v)} className="font-semibold shadow-md hover:shadow-lg bg-gradient-to-r from-primary to-accent-purple hover:from-primary/90 hover:to-accent-purple/90">
+      <Button
+        onClick={() => setOpen((v) => !v)}
+        className="font-semibold shadow-md hover:shadow-lg bg-primary text-white hover:bg-primary/90 border border-primary/20"
+      >
         {label}
       </Button>
 

@@ -27,7 +27,7 @@ export default function RootLayout({
                 />
               </div>
               <div>
-                <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-slate-900 to-primary bg-clip-text text-transparent leading-none">
+                <h1 className="text-xl md:text-2xl font-bold text-slate-900 leading-none">
                   Spot&Solve
                 </h1>
                 <p className="text-xs text-muted-foreground mt-1.5 hidden sm:block font-medium">
